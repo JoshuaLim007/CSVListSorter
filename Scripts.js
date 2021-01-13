@@ -30,6 +30,7 @@ function ParseData(csvData) {
     for (var i = 0; i < DataArray[0].length; i++) {
         KeyArrays[i] = DataArray[0][i];
     }
+
     DisplayKeys();
     DisplayCSV(DataArray);
 
@@ -66,13 +67,17 @@ function DisplayCSV(data) {
 
     var table = document.createElement('table');
     var tBody = document.createElement('tbody');
-    for (var y = 0; y < data.length; y++) {
+    for (var y = 0; y < data.length - 1; y++) {
         var row = document.createElement('tr');
         for (var x = 0; x < data[y].length; x++) {
             var cell = document.createElement('td');
 
-            cell.appendChild(document.createTextNode(data[y][x]));
-
+            if (data[y][x].includes("miss")) {
+                cell.appendChild(document.createTextNode("NaN"));
+            }
+            else {
+                cell.appendChild(document.createTextNode(data[y][x]));
+            }
             row.appendChild(cell);
         }
         tBody.appendChild(row);
@@ -85,38 +90,85 @@ function DisplayCSV(data) {
 
 function SortData(key) {
     var toString = Object.prototype.toString;
-    let isString = toString.call(DataArray[1][key]) == '[object String]';
+    //var isString = toString.call(DataArray[1][key]) == '[object String]';
 
-    let length = DataArray.length - 1;
-    while (length > 0) {
-
-        for (var y = 1; y < length - 1; y++) {
-
-            let left = DataArray[y][key];
-            let right = DataArray[y + 1][key];
-
-            if (left > right) {
-
-
-                for (var i = 0; i < DataArray[y].length; i++) {
-
-
-                    var temp = DataArray[y + 1][i];
-
-
-                    DataArray[y + 1][i] = DataArray[y][i];
-
-
-                    DataArray[y][i] = temp;
-
-
-                }
-            }
-
-        }
-
-        length--;
+    var y = 1;
+    while (DataArray[y][key] == "") {
+        y++;
     }
+    var isString = isNaN(DataArray[y][key])
+
+    console.log(isString);
+    if (isString) {
+        let length = DataArray.length;
+        while (length > 0) {
+
+            for (var y = 1; y < length - 1; y++) {
+
+                var left = DataArray[y][key];
+                var right = DataArray[y + 1][key];
+
+                if (left > right) {
+
+
+                    for (var i = 0; i < DataArray[y].length; i++) {
+
+
+                        var temp = DataArray[y + 1][i];
+
+
+                        DataArray[y + 1][i] = DataArray[y][i];
+
+
+                        DataArray[y][i] = temp;
+
+
+                    }
+                }
+
+            }
+            length--;
+        }
+    }
+    else {
+        let length = DataArray.length;
+
+        while (length > 0) {
+
+            for (var y = 1; y < length - 1; y++) {
+
+                if (DataArray[y][key] == "" || isNaN(DataArray[y][key])) {
+                    DataArray[y][key] = -1000000 + "miss";
+                }
+
+                var left = parseFloat(DataArray[y][key]);
+                var right = parseFloat(DataArray[y + 1][key]);
+
+
+                if (left > right) {
+
+
+                    for (var i = 0; i < DataArray[y].length; i++) {
+
+
+                        var temp = DataArray[y + 1][i];
+
+
+                        DataArray[y + 1][i] = DataArray[y][i];
+
+
+                        DataArray[y][i] = temp;
+
+
+                    }
+                }
+
+            }
+            length--;
+        }
+    }
+
+
 
     DisplayCSV(DataArray);
 
