@@ -8,6 +8,9 @@ Upload your csv file and sort!
 The app will choose the first row as the key.
 It can sort alphebets and numbers.
 
-Sorting dates is WIP
-
 ![image](https://i.imgur.com/2kB4hVD.png)
+
+
+Sorting dates is WIP
+HTML/JS: Joshua Lim
+CSS: Template
