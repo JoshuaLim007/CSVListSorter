@@ -8,4 +8,4 @@ It can sort alphebets and numbers.
 
 Sorting dates is WIP
 
-![image](https://imgur.com/a/IJSRJP7)
+![image](https://imgur.com/2kB4hVD)
