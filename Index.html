@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="Scripts.js"></script>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="StyleSheet.css" />
+    <link rel="stylesheet" href="Styles2.css" />
+    <title>List Sorter</title>
+</head>
+
+
+<body>
+        
+    <div id = "Container" class="container">
+        <h2>CSV Sorter</h2>
+        <label>How to use: 1. Upload your .csv file 2. Sort 3. Save</label>
+        <br />
+
+        <div class ="box">
+            <input type="file" id="file-Upload" name="filename" accept =".csv" />
+        </div>
+
+
+        <br />
+
+        <div id = "SortByContainer">
+        </div>
+        <br />
+
+        <div id = "finalizeContainer">
+        </div>
+        <br />
+
+        <div id = "csvDataContainer">
+        </div>
+
+    </div>
+
+    <script>
+          const fileSelector = document.getElementById('file-Upload');
+          fileSelector.addEventListener('change', (event) => {
+                SetCSVData(event);
+          });
+    </script>
+</body>
+
+
+</html>
